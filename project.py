@@ -1,7 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Load dataset
 df = pd.read_csv("library_data.csv")
 
 # ✅ Fix date parsing (DD-MM-YYYY format)
@@ -37,4 +36,43 @@ plt.title("Transactions Over Time")
 plt.xlabel("Date")
 plt.ylabel("Number of Transactions")
 plt.grid(True)
+plt.show()
+
+# 4️⃣ Histogram (distribution of transactions per day)
+plt.figure(figsize=(6,4))
+daily_counts.plot(kind='hist', bins=10, color='purple', edgecolor='black')
+plt.title("Histogram of Daily Transactions")
+plt.xlabel("Number of Transactions")
+plt.ylabel("Frequency")
+plt.show()
+
+# 5️⃣ Scatter Plot (index vs Roll Number just for demo)
+plt.figure(figsize=(6,4))
+plt.scatter(df.index, df['Roll Number'].astype(int), alpha=0.6, color='green')
+plt.title("Scatter Plot of Roll Numbers")
+plt.xlabel("Transaction Index")
+plt.ylabel("Roll Number")
+plt.show()
+
+# 6️⃣ Box Plot (distribution of daily transactions)
+plt.figure(figsize=(6,4))
+daily_counts.plot(kind='box')
+plt.title("Box Plot of Daily Transactions")
+plt.show()
+
+# 7️⃣ Stacked Bar Chart (Borrowed vs Submitted per day)
+stacked_data = df.groupby([df['Date'].dt.date, 'Transaction']).size().unstack(fill_value=0)
+stacked_data.plot(kind='bar', stacked=True, figsize=(10,5))
+plt.title("Daily Transactions (Stacked)")
+plt.xlabel("Date")
+plt.ylabel("Count")
+plt.show()
+
+# 8️⃣ Area Plot (cumulative transactions)
+cumulative_counts = daily_counts.cumsum()
+plt.figure(figsize=(8,4))
+cumulative_counts.plot(kind='area', alpha=0.4, color='skyblue')
+plt.title("Cumulative Transactions Over Time")
+plt.xlabel("Date")
+plt.ylabel("Cumulative Transactions")
 plt.show()
