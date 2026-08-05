@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# Load dataset
 df = pd.read_csv("library_data.csv")
 
 # ✅ Fix date parsing (DD-MM-YYYY format)
@@ -38,7 +39,7 @@ plt.ylabel("Number of Transactions")
 plt.grid(True)
 plt.show()
 
-# 4️⃣ Histogram (distribution of transactions per day)
+# 4️⃣ Histogram (distribution of daily transactions)
 plt.figure(figsize=(6,4))
 daily_counts.plot(kind='hist', bins=10, color='purple', edgecolor='black')
 plt.title("Histogram of Daily Transactions")
@@ -46,12 +47,12 @@ plt.xlabel("Number of Transactions")
 plt.ylabel("Frequency")
 plt.show()
 
-# 5️⃣ Scatter Plot (index vs Roll Number just for demo)
+# 5️⃣ Scatter Plot (index vs Transaction type)
 plt.figure(figsize=(6,4))
-plt.scatter(df.index, df['Roll Number'].astype(int), alpha=0.6, color='green')
-plt.title("Scatter Plot of Roll Numbers")
+plt.scatter(df.index, df['Transaction'].map({'Borrowed':1, 'Submitted':0}), alpha=0.6, color='green')
+plt.title("Scatter Plot of Transactions")
 plt.xlabel("Transaction Index")
-plt.ylabel("Roll Number")
+plt.ylabel("Transaction (1=Borrowed, 0=Submitted)")
 plt.show()
 
 # 6️⃣ Box Plot (distribution of daily transactions)
