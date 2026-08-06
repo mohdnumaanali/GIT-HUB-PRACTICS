@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 # Load dataset
 df = pd.read_csv("library_data.csv")
 
-# ✅ Fix date parsing (DD-MM-YYYY format)
 df['Date'] = pd.to_datetime(df['Date'], format='%d-%m-%Y')
 
 print(df.head())
